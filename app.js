@@ -144,7 +144,7 @@ function goToMain() {
 
 // 이벤트 리스너
 function setupEventListeners() {
-    elements.activeCard.addEventListener('click', selectCard);
+    //elements.activeCard.addEventListener('click', selectCard);
     elements.activeCard.addEventListener('touchstart', selectCard);
     elements.settingsIcon.addEventListener('click', toggleSettings);
     elements.settingsIcon.addEventListener('click', goToSettings);
