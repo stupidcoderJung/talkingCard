@@ -1,0 +1,108 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    perspective: 1500px;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.card-stack {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    margin-bottom: 40px;
+}
+
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+.card:not(.active) {
+    top: 0;
+    left: 0;
+}
+
+.card:nth-child(1) { transform: translateX(-10px) translateY(-10px) rotate(-5deg); }
+.card:nth-child(2) { transform: translateX(-5px) translateY(-5px) rotate(-2.5deg); }
+.card:nth-child(3) { transform: translateX(0) translateY(0) rotate(0deg); }
+.card:nth-child(4) { transform: translateX(5px) translateY(5px) rotate(2.5deg); }
+.card:nth-child(5) { transform: translateX(10px) translateY(10px) rotate(5deg); }
+
+.card.active {
+    z-index: 10;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.card-front {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+}
+
+.card-back {
+    background: linear-gradient(45deg, #5f27cd, #48dbfb);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    50% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+}
+
+@media (max-width: 600px) {
+    .card-stack {
+        width: 240px;
+        height: 360px;
+    }
+
+    .card-face {
+        font-size: 16px;
+    }
+}
