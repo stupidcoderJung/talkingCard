@@ -106,3 +106,27 @@ body {
         font-size: 16px;
     }
 }
+
+/* 설정 아이콘 스타일 */
+.settings-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.settings-icon:hover {
+    color: #3498db;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+    .settings-icon {
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
+    }
+}
