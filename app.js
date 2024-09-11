@@ -6,6 +6,9 @@ const config = {
     cardBack: '.card-back',
     cardFront: '.card-front',
     settingsIcon: '#settingsIcon',
+    backIcon: '#backIcon',
+    mainPage: '#mainPage',
+    settingsPage: '#settingsPage',
     questions: [
         "가장 기억에 남는 생일은 언제였어?",
         "여행 가본 곳 중에 다시 가보고 싶은 곳이 있다면?",
@@ -43,7 +46,8 @@ const config = {
 // 상태
 let state = {
     currentCardStatus: 'fold',
-    currentQuestionIndex: 0
+    currentQuestionIndex: 0,
+    currentPage: 'main'
 };
 
 // DOM 요소
@@ -53,7 +57,10 @@ const elements = {
     cardInner: document.querySelector(config.cardInner),
     cardBack: document.querySelector(config.cardBack),
     cardFront: document.querySelector(config.cardFront),
-    settingsIcon: document.querySelector(config.settingsIcon)
+    settingsIcon: document.querySelector(config.settingsIcon),
+    backIcon: document.querySelector(config.backIcon),
+    mainPage: document.querySelector(config.mainPage),
+    settingsPage: document.querySelector(config.settingsPage)
 };
 
 // 설정 관련 함수
@@ -122,11 +129,26 @@ function shuffleCards() {
     }, 300);
 }
 
+// 페이지 전환 함수
+function goToSettings() {
+    elements.mainPage.classList.add('hidden');
+    elements.settingsPage.classList.remove('hidden');
+    state.currentPage = 'settings';
+}
+
+function goToMain() {
+    elements.settingsPage.classList.add('hidden');
+    elements.mainPage.classList.remove('hidden');
+    state.currentPage = 'main';
+}
+
 // 이벤트 리스너
 function setupEventListeners() {
     elements.activeCard.addEventListener('click', selectCard);
     elements.activeCard.addEventListener('touchstart', selectCard);
     elements.settingsIcon.addEventListener('click', toggleSettings);
+    elements.settingsIcon.addEventListener('click', goToSettings);
+    elements.backIcon.addEventListener('click', goToMain);
 }
 
 // 초기화
