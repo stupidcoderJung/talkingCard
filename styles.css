@@ -1,51 +1,43 @@
-/* 기본 리셋 및 전역 스타일 */
 * {
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box;
 }
 
-body, html {
-    height: 100%;
+body {
     font-family: 'Noto Sans KR', sans-serif;
     background-color: #f0f0f0;
-    color: #333;
-}
-
-/* 레이아웃 */
-.page {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    height: 100vh;
+    perspective: 1500px;
 }
 
 .container {
-    position: relative;
-    width: 100%;
-    max-width: 500px;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    width: 100%;
+    max-width: 1200px;
 }
 
-/* 카드 스택 */
 .card-stack {
     position: relative;
-    width: 280px;
-    height: 400px;
-    perspective: 1000px;
+    width: 300px;
+    height: 450px;
+    margin-bottom: 40px;
 }
 
 .card {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
 }
 
 .card:not(.active) {
@@ -53,18 +45,21 @@ body, html {
     left: 0;
 }
 
+.card:nth-child(1) { transform: translateX(-10px) translateY(-10px) rotate(-5deg); }
+.card:nth-child(2) { transform: translateX(-5px) translateY(-5px) rotate(-2.5deg); }
+.card:nth-child(3) { transform: translateX(0) translateY(0) rotate(0deg); }
+.card:nth-child(4) { transform: translateX(5px) translateY(5px) rotate(2.5deg); }
+.card:nth-child(5) { transform: translateX(10px) translateY(10px) rotate(5deg); }
+
 .card.active {
     z-index: 10;
-    cursor: pointer;
 }
 
-/* 카드 내부 스타일 */
 .card-inner {
     position: relative;
     width: 100%;
     height: 100%;
-    text-align: center;
-    transition: transform 0.6s;
+    transition: transform 0.5s;
     transform-style: preserve-3d;
 }
 
@@ -76,76 +71,101 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
+    border-radius: 20px;
     padding: 20px;
-    border-radius: 10px;
+    font-size: 18px;
+    text-align: center;
 }
 
 .card-front {
-    background-color: #3498db;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
     color: white;
-    font-size: 1.2em;
-    font-weight: bold;
 }
 
 .card-back {
-    background-color: #2ecc71;
+    background: linear-gradient(45deg, #5f27cd, #48dbfb);
     color: white;
-    font-size: 1.1em;
     transform: rotateY(180deg);
 }
 
-/* 아이콘 스타일 */
-.icon {
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    50% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+}
+
+@media (max-width: 600px) {
+    .card-stack {
+        width: 240px;
+        height: 360px;
+    }
+
+    .card-face {
+        font-size: 16px;
+    }
+}
+
+.page {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hidden {
+    transform: translateX(100%);
+}
+
+/* 설정 아이콘 스타일 */
+.settings-icon, .back-icon {
+    position: absolute;
+    top: 20px;
+    right: 20px;
     font-size: 24px;
     color: #333;
     cursor: pointer;
     transition: color 0.3s ease;
 }
 
-.icon:hover {
-    color: #3498db;
-}
 
 .settings-icon {
-    position: absolute;
-    top: 20px;
     right: 20px;
 }
 
 .back-icon {
-    position: absolute;
-    top: 20px;
     left: 20px;
 }
 
-/* 애니메이션 */
-@keyframes shake {
-    0% { transform: translate(1px, 1px) rotate(0deg); }
-    10% { transform: translate(-1px, -2px) rotate(-1deg); }
-    20% { transform: translate(-3px, 0px) rotate(1deg); }
-    30% { transform: translate(3px, 2px) rotate(0deg); }
-    40% { transform: translate(1px, -1px) rotate(1deg); }
-    50% { transform: translate(-1px, 2px) rotate(-1deg); }
-    60% { transform: translate(-3px, 1px) rotate(0deg); }
-    70% { transform: translate(3px, 1px) rotate(-1deg); }
-    80% { transform: translate(-1px, -1px) rotate(1deg); }
-    90% { transform: translate(1px, 2px) rotate(0deg); }
-    100% { transform: translate(1px, -2px) rotate(-1deg); }
+.settings-icon:hover, .back-icon:hover{
+    color: #3498db;
 }
 
-/* 유틸리티 클래스 */
-.hidden {
-    display: none;
+#settingsPage .container {
+    padding: 60px 20px;
 }
 
-/* 반응형 디자인 */
-@media (max-width: 480px) {
-    .card-stack {
-        width: 240px;
-        height: 340px;
+#settingsPage h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 모바일 대응 */
+@media (max-width: 600px) {
+    .settings-icon {
+        top: 10px;
+        right: 10px;
+        font-size: 20px;
     }
 
-    .card-face {
-        font-size: 0.9em;
+     .settings-icon {
+        right: 10px;
+    }
+    
+    .back-icon {
+        left: 10px;
     }
 }
