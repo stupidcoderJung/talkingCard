@@ -5,6 +5,7 @@ const config = {
     cardInner: '.card-inner',
     cardBack: '.card-back',
     cardFront: '.card-front',
+    settingsIcon: '#settingsIcon',
     questions: [
         "가장 기억에 남는 생일은 언제였어?",
         "여행 가본 곳 중에 다시 가보고 싶은 곳이 있다면?",
@@ -25,8 +26,15 @@ const elements = {
     activeCard: document.querySelector(config.activeCard),
     cardInner: document.querySelector(config.cardInner),
     cardBack: document.querySelector(config.cardBack),
-    cardFront: document.querySelector(config.cardFront)
+    cardFront: document.querySelector(config.cardFront),
+    settingsIcon: document.querySelector(config.settingsIcon)
 };
+
+// 설정 관련 함수
+function toggleSettings() {
+    console.log('설정 토글');
+    // 여기에 설정 패널을 열거나 닫는 로직을 추가할 수 있습니다.
+}
 
 // 유틸리티 함수
 function shuffleArray(array) {
@@ -92,6 +100,7 @@ function shuffleCards() {
 function setupEventListeners() {
     elements.activeCard.addEventListener('click', selectCard);
     elements.activeCard.addEventListener('touchstart', selectCard);
+    elements.settingsIcon.addEventListener('click', toggleSettings);
 }
 
 // 초기화
