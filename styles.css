@@ -107,8 +107,21 @@ body {
     }
 }
 
+.page {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+}
+
+.hidden {
+    transform: translateX(100%);
+}
+
 /* 설정 아이콘 스타일 */
-.settings-icon {
+.settings-icon, .back-icon {
     position: absolute;
     top: 20px;
     right: 20px;
@@ -118,8 +131,26 @@ body {
     transition: color 0.3s ease;
 }
 
-.settings-icon:hover {
+
+.settings-icon {
+    right: 20px;
+}
+
+.back-icon {
+    left: 20px;
+}
+
+.settings-icon:hover, .back-icon:hover{
     color: #3498db;
+}
+
+#settingsPage .container {
+    padding: 60px 20px;
+}
+
+#settingsPage h1 {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 /* 모바일 대응 */
@@ -128,5 +159,13 @@ body {
         top: 10px;
         right: 10px;
         font-size: 20px;
+    }
+
+     .settings-icon {
+        right: 10px;
+    }
+    
+    .back-icon {
+        left: 10px;
     }
 }
