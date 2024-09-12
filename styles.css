@@ -1,105 +1,133 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+/* 모든 요소에 대한 기본 스타일 설정 
+   이는 브라우저 간 일관된 스타일링을 위해 사용됩니다. */
+   * {
+    box-sizing: border-box; /* 패딩과 테두리를 요소의 전체 너비와 높이에 포함 */
+    margin: 0; /* 외부 여백 제거 */
+    padding: 0; /* 내부 여백 제거 */
 }
 
+/* 문서의 기본 스타일 설정
+   전체 페이지의 기본 글꼴과 배경색을 설정합니다. */
 body {
-    font-family: 'Noto Sans KR', sans-serif;
-    background-color: #f0f0f0;
+    font-family: 'Noto Sans KR', sans-serif; /* 한글 지원을 위한 Noto Sans KR 글꼴 사용 */
+    background-color: #f0f0f0; /* 연한 회색 배경으로 눈의 피로를 줄입니다 */
 }
 
+/* 페이지 전체를 덮는 컨테이너 스타일 
+   이 클래스는 각 주요 페이지(예: 메인, 설정)에 적용되어 전체 화면 레이아웃을 제어합니다. */
 .page {
-    width: 100%;
-    height: 100vh;
-    position: absolute;
+    width: 100%; /* 전체 너비 사용 */
+    height: 100vh; /* 뷰포트 높이의 100% (전체 화면 높이) */
+    position: absolute; /* 절대 위치 설정으로 페이지 전환 효과 구현 */
     top: 0;
     left: 0;
-    transition: transform 0.3s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    transition: transform 0.3s ease; /* 페이지 전환 시 부드러운 효과 */
+    display: flex; /* flexbox 레이아웃 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
 }
 
+/* 메인 페이지 특정 스타일
+   3D 카드 효과를 위한 원근감을 추가합니다. */
 #mainPage {
-    perspective: 1500px;
+    perspective: 1500px; /* 3D 효과를 위한 원근감 설정 */
 }
 
+/* 내용을 담는 컨테이너 스타일
+   페이지 내의 주요 콘텐츠를 담는 컨테이너입니다. */
 .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 1200px;
-    height: 100%;
+    display: flex; /* flexbox 레이아웃 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    width: 100%; /* 전체 너비 사용 */
+    max-width: 1200px; /* 최대 너비 제한으로 대형 화면에서도 적절한 레이아웃 유지 */
+    height: 100%; /* 전체 높이 사용 */
 }
 
+/* 카드 스택 컨테이너 스타일
+   여러 카드를 겹쳐서 표시하는 스택 효과를 만듭니다. */
 .card-stack {
-    position: relative;
-    width: 300px;
-    height: 450px;
-    margin-bottom: 40px;
+    position: relative; /* 내부 카드들의 기준점 역할 */
+    width: 300px; /* 카드 스택의 너비 */
+    height: 450px; /* 카드 스택의 높이 */
+    margin-bottom: 40px; /* 하단 여백 */
 }
 
+/* 개별 카드 스타일
+   카드 스택 내의 각 카드에 적용되는 스타일입니다. */
 .card {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    border-radius: 20px;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    transition: all 0.3s ease;
-    transform-style: preserve-3d;
-    cursor: pointer;
+    position: absolute; /* 카드 스택 내에서 겹치도록 배치 */
+    width: 100%; /* 부모 요소의 전체 너비 */
+    height: 100%; /* 부모 요소의 전체 높이 */
+    border-radius: 20px; /* 둥근 모서리 */
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23); /* 그림자 효과 */
+    transition: all 0.3s ease; /* 모든 속성에 대한 부드러운 전환 효과 */
+    transform-style: preserve-3d; /* 3D 변환 스타일 유지 */
+    cursor: pointer; /* 마우스 오버 시 포인터 커서 */
 }
 
+/* 비활성 카드의 위치 설정
+   활성화되지 않은 카드들의 기본 위치를 설정합니다. */
 .card:not(.active) {
     top: 0;
     left: 0;
 }
 
+/* 각 카드의 개별적인 위치 및 회전 설정
+   카드 스택 효과를 만들기 위해 각 카드를 약간씩 이동하고 회전시킵니다. */
 .card:nth-child(1) { transform: translateX(-10px) translateY(-10px) rotate(-5deg); }
 .card:nth-child(2) { transform: translateX(-5px) translateY(-5px) rotate(-2.5deg); }
 .card:nth-child(3) { transform: translateX(0) translateY(0) rotate(0deg); }
 .card:nth-child(4) { transform: translateX(5px) translateY(5px) rotate(2.5deg); }
 .card:nth-child(5) { transform: translateX(10px) translateY(10px) rotate(5deg); }
 
+/* 활성화된 카드 스타일
+   현재 선택된 카드를 다른 카드들 위에 표시합니다. */
 .card.active {
-    z-index: 10;
+    z-index: 10; /* 다른 카드들 위에 표시 */
 }
 
+/* 카드 내부 컨테이너 스타일
+   카드의 앞면과 뒷면을 포함하는 컨테이너입니다. */
 .card-inner {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    transition: transform 0.5s;
-    transform-style: preserve-3d;
+    position: relative; /* 내부 요소의 기준점 역할 */
+    width: 100%; /* 전체 너비 */
+    height: 100%; /* 전체 높이 */
+    transition: transform 0.5s; /* 뒤집기 효과를 위한 변환 효과 */
+    transform-style: preserve-3d; /* 3D 변환 스타일 유지 */
 }
 
+/* 카드의 앞면과 뒷면 공통 스타일
+   카드의 양면에 적용되는 공통 스타일입니다. */
 .card-face {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    backface-visibility: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 20px;
-    padding: 20px;
-    font-size: 18px;
-    text-align: center;
+    position: absolute; /* 카드 내에서 절대 위치 */
+    width: 100%; /* 전체 너비 */
+    height: 100%; /* 전체 높이 */
+    backface-visibility: hidden; /* 뒷면 숨기기 */
+    display: flex; /* flexbox 레이아웃 사용 */
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    border-radius: 20px; /* 둥근 모서리 */
+    padding: 20px; /* 내부 여백 */
+    font-size: 18px; /* 글자 크기 */
+    text-align: center; /* 텍스트 중앙 정렬 */
 }
 
+/* 카드 앞면 스타일 */
 .card-front {
-    background: linear-gradient(45deg, #ff6b6b, #feca57);
-    color: white;
+    background: linear-gradient(45deg, #ff6b6b, #feca57); /* 그라데이션 배경 */
+    color: white; /* 텍스트 색상 */
 }
 
+/* 카드 뒷면 스타일 */
 .card-back {
-    background: linear-gradient(45deg, #5f27cd, #48dbfb);
-    color: white;
-    transform: rotateY(180deg);
+    background: linear-gradient(45deg, #5f27cd, #48dbfb); /* 그라데이션 배경 */
+    color: white; /* 텍스트 색상 */
+    transform: rotateY(180deg); /* Y축 기준 180도 회전 */
 }
 
+/* 흔들림 애니메이션 정의
+   카드를 흔드는 효과를 위한 애니메이션입니다. JavaScript로 적용할 수 있습니다. */
 @keyframes shake {
     0% { transform: translateX(0); }
     25% { transform: translateX(-5px) rotate(-5deg); }
@@ -108,65 +136,75 @@ body {
     100% { transform: translateX(0); }
 }
 
+/* 모바일 화면 대응 스타일
+   화면 너비가 600px 이하일 때 적용되는 스타일입니다. */
 @media (max-width: 600px) {
     .card-stack {
-        width: 240px;
-        height: 360px;
+        width: 240px; /* 카드 스택 너비 축소 */
+        height: 360px; /* 카드 스택 높이 축소 */
     }
 
     .card-face {
-        font-size: 16px;
+        font-size: 16px; /* 글자 크기 축소 */
     }
 }
 
+/* 숨겨진 요소 스타일
+   페이지 전환 효과를 위해 사용됩니다. */
 .hidden {
-    transform: translateX(100%);
+    transform: translateX(100%); /* 오른쪽으로 100% 이동하여 숨김 */
 }
 
-/* 설정 아이콘 스타일 */
+/* 설정 및 뒤로 가기 아이콘 스타일
+   페이지 상단에 위치한 네비게이션 아이콘을 스타일링합니다. */
 .settings-icon, .back-icon {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    font-size: 24px;
-    color: #333;
-    cursor: pointer;
-    transition: color 0.3s ease;
+    position: absolute; /* 페이지 내 절대 위치 */
+    top: 20px; /* 상단에서 20px 떨어짐 */
+    right: 20px; /* 오른쪽에서 20px 떨어짐 */
+    font-size: 24px; /* 아이콘 크기 */
+    color: #333; /* 아이콘 색상 */
+    cursor: pointer; /* 마우스 오버 시 포인터 커서 */
+    transition: color 0.3s ease; /* 색상 변화에 대한 부드러운 전환 효과 */
 }
 
 .settings-icon {
-    right: 20px;
+    right: 20px; /* 오른쪽에 위치 */
 }
 
 .back-icon {
-    left: 20px;
+    left: 20px; /* 왼쪽에 위치 */
 }
 
-.settings-icon:hover, .back-icon:hover{
-    color: #3498db;
+/* 아이콘에 마우스를 올렸을 때의 효과 */
+.settings-icon:hover, .back-icon:hover {
+    color: #3498db; /* 밝은 파란색으로 변경 */
 }
 
+/* 설정 페이지 컨테이너 스타일
+   설정 페이지의 레이아웃을 조정합니다. */
 #settingsPage .container {
-    padding: 60px 20px;
+    padding: 60px 20px; /* 상하 60px, 좌우 20px 패딩 */
 }
 
+/* 설정 페이지 제목 스타일 */
 #settingsPage h1 {
-    text-align: center;
-    margin-bottom: 30px;
+    text-align: center; /* 중앙 정렬 */
+    margin-bottom: 30px; /* 하단 여백 */
 }
 
-/* 모바일 대응 */
+/* 모바일 화면에서의 아이콘 조정
+   화면 크기가 작을 때 아이콘의 위치와 크기를 조정합니다. */
 @media (max-width: 600px) {
     .settings-icon, .back-icon {
-        top: 10px;
-        font-size: 20px;
+        top: 10px; /* 상단에서 10px로 조정 */
+        font-size: 20px; /* 아이콘 크기 축소 */
     }
 
     .settings-icon {
-        right: 10px;
+        right: 10px; /* 오른쪽 여백 축소 */
     }
     
     .back-icon {
-        left: 10px;
+        left: 10px; /* 왼쪽 여백 축소 */
     }
 }
