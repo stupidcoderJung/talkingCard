@@ -12,6 +12,8 @@ const config = {
     startButton: '#startButton',
     topicInput: '#topicInput',
     backToTopicInputButton: '#backToTopicInputButton',
+    loginButton: '#loginButton',
+    logoutButton: '#logoutButton',
     questions: [
         "가장 기억에 남는 생일은 언제였어?",
         "여행 가본 곳 중에 다시 가보고 싶은 곳이 있다면?",
@@ -67,7 +69,9 @@ const elements = {
     topicInputPage: document.querySelector(config.topicInputPage),
     startButton: document.querySelector(config.startButton),
     topicInput: document.querySelector(config.topicInput),
-    backToTopicInputButton: document.querySelector(config.backToTopicInputButton)
+    backToTopicInputButton: document.querySelector(config.backToTopicInputButton),
+    loginButton: document.querySelector(config.loginButton),
+    logoutButton: document.querySelector(config.logoutButton)
 };
 
 // 설정 관련 함수
@@ -169,6 +173,23 @@ function setupQuestions() {
     }
 }
 
+// 로그인 및 로그아웃 함수
+function login() {
+    gapi.auth2.getAuthInstance().signIn().then(function(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log('ID: ' + profile.getId());
+        console.log('Name: ' + profile.getName());
+        console.log('Image URL: ' + profile.getImageUrl());
+        console.log('Email: ' + profile.getEmail());
+    });
+}
+
+function logout() {
+    gapi.auth2.getAuthInstance().signOut().then(function () {
+        console.log('User signed out.');
+    });
+}
+
 // 이벤트 리스너
 function setupEventListeners() {
     elements.activeCard.addEventListener('touchstart', function(event) {
@@ -181,6 +202,8 @@ function setupEventListeners() {
     elements.backIcon.addEventListener('click', goToMain);
     elements.startButton.addEventListener('click', setupQuestions);
     elements.backToTopicInputButton.addEventListener('click', goToTopicInput);
+    elements.loginButton.addEventListener('click', login);
+    elements.logoutButton.addEventListener('click', logout);
 }
 
 // 초기화
