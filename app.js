@@ -199,6 +199,22 @@ function logout() {
     });
 }
 
+// 로그인 처리 함수
+function loginUser(event) {
+    event.preventDefault();
+    const username = document.querySelector('#username').value;
+    const password = document.querySelector('#password').value;
+
+    // 여기에 로그인 로직을 추가합니다.
+    if (username === 'user' && password === 'password') {
+        state.isLoggedIn = true;
+        elements.mainPage.style.display = 'block';
+        document.querySelector('#loginForm').style.display = 'none';
+    } else {
+        alert('로그인 정보가 올바르지 않습니다.');
+    }
+}
+
 // 이벤트 리스너
 function setupEventListeners() {
     elements.activeCard.addEventListener('touchstart', function(event) {
@@ -213,6 +229,7 @@ function setupEventListeners() {
     elements.backToTopicInputButton.addEventListener('click', goToTopicInput);
     elements.loginButton.addEventListener('click', login);
     elements.logoutButton.addEventListener('click', logout);
+    document.querySelector('#loginForm').addEventListener('submit', loginUser);
 }
 
 // 초기화
