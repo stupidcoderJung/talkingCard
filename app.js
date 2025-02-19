@@ -8,6 +8,9 @@ const config = {
     backIcon: '#backIcon',
     mainPage: '#mainPage',
     settingsPage: '#settingsPage',
+    topicInputPage: '#topicInputPage',
+    startButton: '#startButton',
+    topicInput: '#topicInput',
     questions: [
         "가장 기억에 남는 생일은 언제였어?",
         "여행 가본 곳 중에 다시 가보고 싶은 곳이 있다면?",
@@ -59,7 +62,10 @@ const elements = {
     settingsIcon: document.querySelector(config.settingsIcon),
     backIcon: document.querySelector(config.backIcon),
     mainPage: document.querySelector(config.mainPage),
-    settingsPage: document.querySelector(config.settingsPage)
+    settingsPage: document.querySelector(config.settingsPage),
+    topicInputPage: document.querySelector(config.topicInputPage),
+    startButton: document.querySelector(config.startButton),
+    topicInput: document.querySelector(config.topicInput)
 };
 
 // 설정 관련 함수
@@ -141,6 +147,26 @@ function goToMain() {
     state.currentPage = 'main';
 }
 
+function goToTopicInput() {
+    elements.mainPage.classList.add('hidden');
+    elements.topicInputPage.classList.remove('hidden');
+    state.currentPage = 'topicInput';
+}
+
+function setupQuestions() {
+    const topic = elements.topicInput.value;
+    if (topic) {
+        // AI를 통해 30개의 랜덤 질문을 가져오는 로직을 여기에 추가합니다.
+        // 예시로, 현재는 기존 질문 배열을 섞어서 사용합니다.
+        shuffleArray(config.questions);
+        elements.topicInputPage.classList.add('hidden');
+        elements.mainPage.classList.remove('hidden');
+        state.currentPage = 'main';
+    } else {
+        alert('주제를 입력해주세요.');
+    }
+}
+
 // 이벤트 리스너
 function setupEventListeners() {
     elements.activeCard.addEventListener('touchstart', function(event) {
@@ -151,12 +177,14 @@ function setupEventListeners() {
     elements.settingsIcon.addEventListener('click', toggleSettings);
     elements.settingsIcon.addEventListener('click', goToSettings);
     elements.backIcon.addEventListener('click', goToMain);
+    elements.startButton.addEventListener('click', setupQuestions);
 }
 
 // 초기화
 function init() {
     shuffleArray(config.questions);
     setupEventListeners();
+    goToTopicInput();
 }
 
 // 앱 시작
