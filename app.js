@@ -143,8 +143,11 @@ function goToMain() {
 
 // 이벤트 리스너
 function setupEventListeners() {
+    elements.activeCard.addEventListener('touchstart', function(event) {
+        event.preventDefault();
+        selectCard(event);
+    });
     elements.activeCard.addEventListener('click', selectCard);
-    elements.activeCard.addEventListener('touchstart', selectCard);
     elements.settingsIcon.addEventListener('click', toggleSettings);
     elements.settingsIcon.addEventListener('click', goToSettings);
     elements.backIcon.addEventListener('click', goToMain);
