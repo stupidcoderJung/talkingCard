@@ -13,7 +13,9 @@
 ### 3.1 프론트엔드
 - HTML5
 - CSS3 (Flexbox, 3D 변형, 애니메이션)
-- Vanilla JavaScript (ES6+)
+- React (JSX, 컴포넌트 기반 아키텍처)
+- React Router (페이지 간 네비게이션)
+- 상태 관리 라이브러리 (Redux 또는 Context API)
 
 ### 3.2 성능 최적화
 - GPU 가속을 위해 transform과 opacity 속성 주로 사용
@@ -90,3 +92,30 @@
 
 ## 8. 제공된 질문 리스트
 [30개의 질문 리스트 포함]
+
+## 9. 프로젝트 구조
+```
+/
+├── index.html
+├── styles.css
+├── app.js
+├── 404.html
+├── components
+│   ├── Card.js
+│   ├── CardStack.js
+│   ├── Settings.js
+���   ├── TopicInput.js
+│   ├── MainPage.js
+├── features
+│   ├── cards
+│   │   ├── Card.js
+│   │   ├── CardStack.js
+│   ├── settings
+│   │   ├── Settings.js
+│   ├── topicInput
+│   │   ├── TopicInput.js
+├── pages
+│   ├── MainPage.js
+│   ├── SettingsPage.js
+│   ├── TopicInputPage.js
+```
