@@ -52,7 +52,8 @@ const config = {
 let state = {
     currentCardStatus: 'fold',
     currentQuestionIndex: 0,
-    currentPage: 'main'
+    currentPage: 'main',
+    isLoggedIn: false
 };
 
 // DOM 요소
@@ -154,9 +155,13 @@ function goToMain() {
 }
 
 function goToTopicInput() {
-    elements.mainPage.classList.add('hidden');
-    elements.topicInputPage.classList.remove('hidden');
-    state.currentPage = 'topicInput';
+    if (state.isLoggedIn) {
+        elements.mainPage.classList.add('hidden');
+        elements.topicInputPage.classList.remove('hidden');
+        state.currentPage = 'topicInput';
+    } else {
+        alert('로그인이 필요합니다.');
+    }
 }
 
 function setupQuestions() {
@@ -181,12 +186,16 @@ function login() {
         console.log('Name: ' + profile.getName());
         console.log('Image URL: ' + profile.getImageUrl());
         console.log('Email: ' + profile.getEmail());
+        state.isLoggedIn = true;
+        elements.mainPage.style.display = 'block';
     });
 }
 
 function logout() {
     gapi.auth2.getAuthInstance().signOut().then(function () {
         console.log('User signed out.');
+        state.isLoggedIn = false;
+        elements.mainPage.style.display = 'none';
     });
 }
 
