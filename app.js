@@ -11,6 +11,7 @@ const config = {
     topicInputPage: '#topicInputPage',
     startButton: '#startButton',
     topicInput: '#topicInput',
+    backToTopicInputButton: '#backToTopicInputButton',
     questions: [
         "가장 기억에 남는 생일은 언제였어?",
         "여행 가본 곳 중에 다시 가보고 싶은 곳이 있다면?",
@@ -65,7 +66,8 @@ const elements = {
     settingsPage: document.querySelector(config.settingsPage),
     topicInputPage: document.querySelector(config.topicInputPage),
     startButton: document.querySelector(config.startButton),
-    topicInput: document.querySelector(config.topicInput)
+    topicInput: document.querySelector(config.topicInput),
+    backToTopicInputButton: document.querySelector(config.backToTopicInputButton)
 };
 
 // 설정 관련 함수
@@ -178,6 +180,7 @@ function setupEventListeners() {
     elements.settingsIcon.addEventListener('click', goToSettings);
     elements.backIcon.addEventListener('click', goToMain);
     elements.startButton.addEventListener('click', setupQuestions);
+    elements.backToTopicInputButton.addEventListener('click', goToTopicInput);
 }
 
 // 초기화
