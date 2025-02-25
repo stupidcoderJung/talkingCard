@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/talkingCard/static/css/main.138c56cc.css",
+    "main.js": "/talkingCard/static/js/main.e53427ce.js",
+    "index.html": "/talkingCard/index.html",
+    "main.138c56cc.css.map": "/talkingCard/static/css/main.138c56cc.css.map",
+    "main.e53427ce.js.map": "/talkingCard/static/js/main.e53427ce.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.138c56cc.css",
+    "static/js/main.e53427ce.js"
+  ]
+}
