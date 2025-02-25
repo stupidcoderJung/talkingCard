@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "사용자에게 랜덤한 질문을 카드 형태로 제시하는 React 앱",
     "private": true,
+    "homepage": "https://stupidcoderjung.github.io/talkingCard",
     "dependencies": {
       "@fortawesome/fontawesome-svg-core": "^6.5.1",
       "@fortawesome/free-solid-svg-icons": "^6.5.1",
@@ -40,6 +41,5 @@
         "last 1 firefox version",
         "last 1 safari version"
       ]
-    },
-    "homepage": "."
+    }
   }
