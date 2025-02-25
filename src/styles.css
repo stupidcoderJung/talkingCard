@@ -1,0 +1,261 @@
+/* 모든 요소에 대한 기본 스타일 설정 */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 문서의 기본 스타일 설정 */
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* 페이지 전체를 덮는 컨테이너 스타일 */
+.page {
+    width: 100%;
+    height: 100vh;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 메인 페이지 특정 스타일 */
+.main-page {
+    perspective: 1500px;
+}
+
+/* 내용을 담는 컨테이너 스타일 */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    height: 100%;
+    position: relative;
+}
+
+/* 카드 스택 컨테이너 스타일 */
+.card-stack {
+    position: relative;
+    width: 300px;
+    height: 450px;
+    margin-bottom: 40px;
+}
+
+/* 개별 카드 스타일 */
+.card {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    transition: all 0.3s ease;
+    transform-style: preserve-3d;
+    cursor: pointer;
+}
+
+/* 비활성 카드의 위치 설정 */
+.card:not(.active) {
+    top: 0;
+    left: 0;
+}
+
+/* 카드 내부 컨테이너 스타일 */
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+
+/* 카드의 앞면과 뒷면 공통 스타일 */
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    padding: 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+/* 카드 앞면 스타일 */
+.card-front {
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+}
+
+/* 카드 뒷면 스타일 */
+.card-back {
+    background: linear-gradient(45deg, #5f27cd, #48dbfb);
+    color: white;
+    transform: rotateY(180deg);
+}
+
+/* 흔들림 애니메이션 정의 */
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px) rotate(-5deg); }
+    50% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0); }
+}
+
+/* 숨겨진 요소 스타일 */
+.hidden {
+    transform: translateX(100%);
+}
+
+/* 아이콘 버튼 공통 스타일 */
+.icon-button {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 설정 아이콘 위치 */
+.settings-icon {
+    top: 20px;
+    right: 20px;
+}
+
+/* 뒤로 가기 아이콘 위치 */
+.back-icon {
+    top: 20px;
+    left: 20px;
+}
+
+/* 아이콘에 마우스를 올렸을 때의 효과 */
+.icon-button:hover {
+    background: linear-gradient(45deg, #feca57, #ff6b6b);
+    transform: scale(1.1);
+}
+
+/* 주제 입력 페이지 스타일 */
+.topic-input-page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* 주제 입력 필드 스타일 */
+.topic-input {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+
+/* 시작 버튼 스타일 */
+.start-button {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(45deg, #ff6b6b, #feca57);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+/* 시작 버튼에 마우스를 올렸을 때의 효과 */
+.start-button:hover {
+    background: linear-gradient(45deg, #feca57, #ff6b6b);
+}
+
+/* 설정 페이지 스타일 */
+.settings-page h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+/* 카드 스택 효과 스타일 */
+.stack-card-1 { transform: translateX(-10px) translateY(-10px) rotate(-5deg); }
+.stack-card-2 { transform: translateX(-5px) translateY(-5px) rotate(-2.5deg); }
+.stack-card-3 { transform: translateX(0) translateY(0) rotate(0deg); }
+.stack-card-4 { transform: translateX(5px) translateY(5px) rotate(2.5deg); }
+.stack-card-5 { transform: translateX(10px) translateY(10px) rotate(5deg); }
+
+/* 카드 뒤집힌 상태 */
+.card-inner.flipped {
+    transform: rotateY(180deg) !important;
+}
+
+/* 활성화된 카드에 적용되는 스타일 */
+.card.active {
+    z-index: 10;
+}
+
+/* 카드가 선택되었을 때 확대 효과 */
+.card.selected {
+    transform: translateY(-50px) scale(1.1);
+}
+
+/* 카드가 완전히 펼쳐진 상태 */
+.card.open {
+    transform: translateY(0) scale(1.1);
+}
+
+/* 모바일 화면 대응 스타일 */
+@media (max-width: 600px) {
+    .card-stack {
+        width: 240px;
+        height: 360px;
+    }
+
+    .card-face {
+        font-size: 16px;
+    }
+    
+    .icon-button {
+        top: 10px;
+        font-size: 18px;
+    }
+    
+    .settings-icon {
+        right: 10px;
+    }
+    
+    .back-icon {
+        left: 10px;
+    }
+    
+    .topic-input, .start-button {
+        width: 90%;
+    }
+}
+
+/* 애니메이션 효과 클래스 */
+.shake-animation {
+    animation: shake 0.3s ease-in-out;
+}
