@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /**
  * 카드 컴포넌트
@@ -32,6 +32,12 @@ const Card = ({
   // 애니메이션 속도 클래스 계산
   const animationClass = `animation-${animationSpeed}`;
   
+  useEffect(() => {
+    if (isFlipped) {
+      console.log(`Font size: ${fontSize}px`);
+    }
+  }, [isFlipped, fontSize]);
+
   return (
     <div className={`${cardClasses} ${animationClass}`} onClick={onClick} data-testid="card">
       <div className={innerClasses}>

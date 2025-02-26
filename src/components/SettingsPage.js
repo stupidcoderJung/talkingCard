@@ -28,6 +28,7 @@ const SettingsPage = ({ onBackClick }) => {
       fontSize,
     };
     localStorage.setItem('settings', JSON.stringify(settings));
+    console.log('Settings saved:', settings); // P1dad
     alert('설정이 저장되었습니다.');
   };
 

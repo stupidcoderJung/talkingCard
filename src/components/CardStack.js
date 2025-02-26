@@ -27,11 +27,12 @@ const CardStack = ({ questions, animationSpeed, fontSize }) => {
         setIsFlipped(true);
         setCurrentCardStatus('open');
         console.log('카드 상태 변경: open, 카드 뒤집힘');
+        console.log(`Font size: ${fontSize}px`);
       }, 300);
       
       return () => clearTimeout(timer);
     }
-  }, [currentCardStatus]);
+  }, [currentCardStatus, fontSize]);
   
   // 카드 섞기 효과를 위한 랜덤 위치 설정
   useEffect(() => {
@@ -78,6 +79,7 @@ const CardStack = ({ questions, animationSpeed, fontSize }) => {
       setCurrentQuestionIndex((prevIndex) => (prevIndex + 1) % questions.length);
       setIsFlipped(false);
       setCurrentCardStatus('fold');
+      console.log(`Font size: ${fontSize}px`);
     }, 700);
   };
   
