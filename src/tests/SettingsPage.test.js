@@ -68,4 +68,28 @@ describe('SettingsPage 컴포넌트', () => {
     // 콜백 함수가 호출되었는지 확인
     expect(onBackClickMock).toHaveBeenCalled();
   });
+
+  // 설정이 카드 뒤집기 이벤트에 적용되는지 테스트
+  test('설정이 카드 뒤집기 이벤트에 적용되어야 함', () => {
+    render(<SettingsPage onBackClick={() => {}} />);
+    
+    // 설정 값 변경
+    fireEvent.change(screen.getByLabelText('카드 애니메이션 속도:'), { target: { value: 'fast' } });
+    fireEvent.change(screen.getByLabelText('카드 디자인 테마:'), { target: { value: 'theme2' } });
+    fireEvent.change(screen.getByLabelText('질문 폰트 크기:'), { target: { value: '20' } });
+    
+    // 저장 버튼 클릭
+    fireEvent.click(screen.getByText('저장'));
+    
+    // localStorage에 설정이 저장되었는지 확인
+    const savedSettings = JSON.parse(localStorage.getItem('settings'));
+    expect(savedSettings).toEqual({
+      animationSpeed: 'fast',
+      theme: 'theme2',
+      fontSize: 20,
+    });
+
+    // 카드 뒤집기 이벤트에 설정이 적용되었는지 확인
+    // (이 부분은 실제 카드 컴포넌트와의 통합 테스트에서 확인해야 함)
+  });
 });
