@@ -92,4 +92,19 @@ describe('SettingsPage 컴포넌트', () => {
     // 카드 뒤집기 이벤트에 설정이 적용되었는지 확인
     // (이 부분은 실제 카드 컴포넌트와의 통합 테스트에서 확인해야 함)
   });
+
+  // 사용자 폰트 저장 시 데이터 변경 구조 테스트
+  test('사용자 폰트 저장 시 데이터가 올바르게 변경되어야 함', () => {
+    render(<SettingsPage onBackClick={() => {}} />);
+    
+    // 폰트 크기 설정 값 변경
+    fireEvent.change(screen.getByLabelText('질문 폰트 크기:'), { target: { value: '20' } });
+    
+    // 저장 버튼 클릭
+    fireEvent.click(screen.getByText('저장'));
+    
+    // localStorage에 설정이 저장되었는지 확인
+    const savedSettings = JSON.parse(localStorage.getItem('settings'));
+    expect(savedSettings.fontSize).toBe(20);
+  });
 });
