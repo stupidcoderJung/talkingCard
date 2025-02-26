@@ -12,26 +12,37 @@ const App = () => {
   // 상태 관리
   const [currentPage, setCurrentPage] = useState('topicInput'); // 'topicInput', 'main', 'settings'
   const [questions, setQuestions] = useState([]);
-  
+  const [settings, setSettings] = useState({
+    animationSpeed: 'normal',
+    theme: 'theme1',
+    fontSize: 16,
+  });
+
   // 애플리케이션 초기화
   useEffect(() => {
     // 질문 배열 섞기
     setQuestions(shuffleArray(defaultQuestions));
+
+    // 설정 로드
+    const savedSettings = JSON.parse(localStorage.getItem('settings'));
+    if (savedSettings) {
+      setSettings(savedSettings);
+    }
   }, []);
-  
+
   // 페이지 전환 함수들
   const goToSettings = () => {
     setCurrentPage('settings');
   };
-  
+
   const goToMain = () => {
     setCurrentPage('main');
   };
-  
+
   const goToTopicInput = () => {
     setCurrentPage('topicInput');
   };
-  
+
   // 주제 입력 후 시작 버튼 클릭 처리
   const handleStartClick = (topic) => {
     // 실제 애플리케이션에서는 여기서 AI를 통해 주제에 맞는 질문을 생성할 수 있음
@@ -40,7 +51,13 @@ const App = () => {
     setQuestions(shuffleArray(defaultQuestions));
     goToMain();
   };
-  
+
+  // 설정 저장 함수
+  const handleSaveSettings = (newSettings) => {
+    setSettings(newSettings);
+    localStorage.setItem('settings', JSON.stringify(newSettings));
+  };
+
   // 현재 페이지에 따라 다른 컴포넌트 렌더링
   const renderCurrentPage = () => {
     switch (currentPage) {
@@ -50,12 +67,15 @@ const App = () => {
             questions={questions}
             onSettingsClick={goToSettings}
             onBackClick={goToTopicInput}
+            settings={settings}
           />
         );
       case 'settings':
         return (
           <SettingsPage 
             onBackClick={goToMain}
+            settings={settings}
+            onSaveSettings={handleSaveSettings}
           />
         );
       case 'topicInput':
@@ -67,9 +87,9 @@ const App = () => {
         );
     }
   };
-  
+
   return (
-    <div className="app" data-testid="app">
+    <div className={`app ${settings.theme}`} data-testid="app">
       {renderCurrentPage()}
     </div>
   );

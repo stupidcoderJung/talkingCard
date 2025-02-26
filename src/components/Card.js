@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 /**
  * 카드 컴포넌트
@@ -9,6 +9,8 @@ import React from 'react';
  * @param {string} props.question - 카드 뒷면에 표시할 질문
  * @param {function} props.onClick - 클릭 이벤트 핸들러
  * @param {string} props.frontText - 카드 앞면 텍스트
+ * @param {string} props.animationSpeed - 카드 애니메이션 속도
+ * @param {number} props.fontSize - 질문 폰트 크기
  */
 const Card = ({ 
   className = "", 
@@ -16,7 +18,9 @@ const Card = ({
   isFlipped = false, 
   question = "", 
   onClick = () => {}, 
-  frontText = "카드를 클릭하세요" 
+  frontText = "카드를 클릭하세요",
+  animationSpeed = "normal",
+  fontSize = 16
 }) => {
   
   // 카드 클래스 계산
@@ -25,13 +29,22 @@ const Card = ({
   // 카드 내부 클래스 계산
   const innerClasses = `card-inner ${isFlipped ? 'flipped' : ''}`;
   
+  // 애니메이션 속도 클래스 계산
+  const animationClass = `animation-${animationSpeed}`;
+  
+  useEffect(() => {
+    if (isFlipped) {
+      console.log(`Font size: ${fontSize}px`);
+    }
+  }, [isFlipped, fontSize]);
+
   return (
-    <div className={cardClasses} onClick={onClick} data-testid="card">
+    <div className={`${cardClasses} ${animationClass}`} onClick={onClick} data-testid="card">
       <div className={innerClasses}>
-        <div className="card-face card-front">
+        <div className="card-face card-front" style={{ fontSize: `${fontSize}px` }}>
           {frontText}
         </div>
-        <div className="card-face card-back">
+        <div className="card-face card-back" style={{ fontSize: `${fontSize}px` }}>
           {question}
         </div>
       </div>

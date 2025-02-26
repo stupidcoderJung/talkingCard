@@ -5,8 +5,10 @@ import Card from './Card';
  * 카드 스택 컴포넌트
  * @param {object} props - 컴포넌트 속성
  * @param {array} props.questions - 질문 배열
+ * @param {string} props.animationSpeed - 카드 애니메이션 속도
+ * @param {number} props.fontSize - 질문 폰트 크기
  */
-const CardStack = ({ questions }) => {
+const CardStack = ({ questions, animationSpeed, fontSize }) => {
   // 상태 관리
   const [currentCardStatus, setCurrentCardStatus] = useState('fold'); // fold, selected, open
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -25,11 +27,12 @@ const CardStack = ({ questions }) => {
         setIsFlipped(true);
         setCurrentCardStatus('open');
         console.log('카드 상태 변경: open, 카드 뒤집힘');
+        console.log(`Font size: ${fontSize}px`);
       }, 300);
       
       return () => clearTimeout(timer);
     }
-  }, [currentCardStatus]);
+  }, [currentCardStatus, fontSize]);
   
   // 카드 섞기 효과를 위한 랜덤 위치 설정
   useEffect(() => {
@@ -76,6 +79,7 @@ const CardStack = ({ questions }) => {
       setCurrentQuestionIndex((prevIndex) => (prevIndex + 1) % questions.length);
       setIsFlipped(false);
       setCurrentCardStatus('fold');
+      console.log(`Font size: ${fontSize}px`);
     }, 700);
   };
   
@@ -113,6 +117,8 @@ const CardStack = ({ questions }) => {
         question={questions[currentQuestionIndex]}
         onClick={selectCard}
         className={currentCardStatus === 'selected' ? 'selected' : (currentCardStatus === 'open' ? 'open' : '')}
+        animationSpeed={animationSpeed}
+        fontSize={fontSize}
       />
     </div>
   );

@@ -259,3 +259,56 @@ body {
 .shake-animation {
     animation: shake 0.3s ease-in-out;
 }
+
+/* CSS 변수 정의 */
+:root {
+    --theme1-bg: linear-gradient(45deg, #ff6b6b, #feca57);
+    --theme1-color: white;
+    --theme2-bg: linear-gradient(45deg, #5f27cd, #48dbfb);
+    --theme2-color: white;
+    --theme3-bg: linear-gradient(45deg, #1dd1a1, #10ac84);
+    --theme3-color: white;
+    --theme4-bg: linear-gradient(45deg, #ff9ff3, #f368e0);
+    --theme4-color: white;
+    --theme5-bg: linear-gradient(45deg, #54a0ff, #2e86de);
+    --theme5-color: white;
+}
+
+/* 동적으로 적용되는 테마 스타일 */
+.theme1 {
+    --card-bg: var(--theme1-bg);
+    --card-color: var(--theme1-color);
+}
+
+.theme2 {
+    --card-bg: var(--theme2-bg);
+    --card-color: var(--theme2-color);
+}
+
+.theme3 {
+    --card-bg: var(--theme3-bg);
+    --card-color: var(--theme3-color);
+}
+
+.theme4 {
+    --card-bg: var(--theme4-bg);
+    --card-color: var(--theme4-color);
+}
+
+.theme5 {
+    --card-bg: var(--theme5-bg);
+    --card-color: var(--theme5-color);
+}
+
+/* 카드 앞면 스타일 */
+.card-front {
+    background: var(--card-bg);
+    color: var(--card-color);
+}
+
+/* 카드 뒷면 스타일 */
+.card-back {
+    background: var(--card-bg);
+    color: var(--card-color);
+    transform: rotateY(180deg);
+}
