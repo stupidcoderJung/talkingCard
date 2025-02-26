@@ -5,8 +5,9 @@ import Card from './Card';
  * 카드 스택 컴포넌트
  * @param {object} props - 컴포넌트 속성
  * @param {array} props.questions - 질문 배열
+ * @param {string} props.animationSpeed - 카드 애니메이션 속도
  */
-const CardStack = ({ questions }) => {
+const CardStack = ({ questions, animationSpeed }) => {
   // 상태 관리
   const [currentCardStatus, setCurrentCardStatus] = useState('fold'); // fold, selected, open
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -113,6 +114,7 @@ const CardStack = ({ questions }) => {
         question={questions[currentQuestionIndex]}
         onClick={selectCard}
         className={currentCardStatus === 'selected' ? 'selected' : (currentCardStatus === 'open' ? 'open' : '')}
+        animationSpeed={animationSpeed}
       />
     </div>
   );
